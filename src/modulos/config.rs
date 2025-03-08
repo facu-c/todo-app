@@ -1,37 +1,43 @@
-pub struct ConfigFile {    
-    name_file : String,
+
+use serde_derive::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+pub struct ConfigFile { 
+    id_task: u64,   
     name_task : String,
+    desc_task : String,
     done : bool,
 }
 
 impl ConfigFile {
     
-    pub fn new_file(name_file: String, name_task: String) -> Self {
+    pub fn new_file(name_task: String, desc_task: String, id_task: u64) -> Self {
         
         Self{
-            name_file,
+            id_task,
             name_task,
+            desc_task,
             done : false,
         }
 
     }
 
     pub fn get_name(&self) -> String {
-        self.name_file.clone()
+        self.name_task.clone()
     }
     pub fn get_task(&self) -> String {
-        self.name_task.clone()
+        self.desc_task.clone()
     }
     
     pub fn get_done(&self) -> bool {
         self.done
     }
     
-    // pub fn get_id(&self) -> i8 {
-    //     self.id_task
-    // }
+     pub fn get_id(&self) -> u64 {
+         self.id_task
+    }
 
-    //pub fn set_done(mut self) {
-     //   self.done = true;
-    //}
+    pub fn set_done(mut self) {
+       self.done = true;
+    }
 }

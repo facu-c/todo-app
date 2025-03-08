@@ -1,30 +1,18 @@
 
-
 pub mod create_task {
     use std::{fs::File, io::Write};  
-    use crate::modulos::config::ConfigFile; 
+    use crate::modulos::config::ConfigFile;
 
     fn create_file(config_file : ConfigFile) {
 
         println!("**********");
-
-        let save_file = format!("{} - {} - /",config_file.get_done(), config_file.get_task().trim());
         
-        let mut f = File::create(format!("//home/facundo/Documentos/{}.txt",config_file.get_name())).expect("No se pudo crear el archivo");
-        match f.write_all(&save_file.as_bytes()) {
-            Ok(_) => {
-                println!("Archivo creado con exito");
-            },
-            Err(msg) => {
-                eprintln!("No se pudo crear el archivo: {}", msg);
-            }
-        }
 
         println!("**********");
 
     }
 
-    pub fn create_task() {
+    pub fn create_task(id_task: u64) {
         
         use std::io;
         use crate::modulos::config::ConfigFile;
@@ -40,16 +28,18 @@ pub mod create_task {
     
         //let mut id = 0;
 
-        let config_file = ConfigFile::new_file(input_name, input_task);
+        let config_file = ConfigFile::new_file(input_name, input_task, id_task);
         
        // id += 1;
 
         println!();
-    
+        
+        let serialized_file = toml::to_string(&config_file).unwrap();
+
         create_file(config_file);
     }
 }
 
-pub mod get_task {
+// pub mod get_task {
     
-}
+// }
