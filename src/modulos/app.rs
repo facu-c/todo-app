@@ -1,4 +1,4 @@
-use std::{fs, io};
+use std::{fs::{self, File}, io};
 use crate::modulos::tasks::create_task::create_task;
 extern crate dirs;
 
@@ -6,15 +6,17 @@ pub fn run_app() {
 
     let document_dir = match dirs::document_dir() {
         Some(dir) => {
-            dir.display().to_string()
+            format!("{}/qacer",dir.display().to_string())
         },
         None => {
             String::from("no se pudo encotrar el path correcto")
         }
     };
 
-    match fs::create_dir(document_dir) {
-        Ok(_) => {},
+    match fs::create_dir(&document_dir) {
+        Ok(_) => {
+            let _ = File::create(format!("{}/save_file",&document_dir));
+        },
         Err(msg) => { eprintln!("Hubo un problema con la creacion del directorio raiz: {} ", msg); }
     }
 

@@ -9,6 +9,7 @@ pub struct ConfigFile {
     done : bool,
 }
 
+#[warn(dead_code)]
 impl ConfigFile {
     
     pub fn new_file(name_task: String, desc_task: String, id_task: u64) -> Self {

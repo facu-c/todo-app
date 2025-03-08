@@ -1,14 +1,32 @@
 
 pub mod create_task {
-    use std::{fs::File, io::Write};  
+
+    use std::{fs::{self, File}, io::Read};
+
     use crate::modulos::config::ConfigFile;
 
     fn create_file(config_file : ConfigFile) {
 
-        println!("**********");
-        
+        let path = format!("{}/qacer/save_file", dirs::document_dir().unwrap().display().to_string());
 
-        println!("**********");
+        let mut data = String::new();
+
+        let _ = match File::open(&path) {
+            Ok(mut file) => {
+                file.read_to_string(&mut data)
+            },
+            Err(_) => {
+                return;
+            }
+        };
+
+        let contents = toml::to_string(&config_file).unwrap();
+
+        data.push_str(&contents);
+
+        let _ = fs::write(&path, &data);
+
+        println!("{:?}", data);
 
     }
 
@@ -17,25 +35,23 @@ pub mod create_task {
         use std::io;
         use crate::modulos::config::ConfigFile;
         
-        let mut input_task = String::new();
-        let mut input_name = String::new();
+        let mut input_desc_task = String::new();
+        let mut input_name_task = String::new();
         
-        println!("Ingrese el nombre con el que guardar el archivo: ");
-        let _ = io::stdin().read_line(&mut input_name);
+        println!("Ingrese de la tarea: ");
+        let _ = io::stdin().read_line(&mut input_name_task);
         println!();
-        println!("Ingrese la tarea a realizar: ");
-        let _ = io::stdin().read_line(&mut input_task);
+        println!("Agrege una descripcion de la tarea: ");
+        let _ = io::stdin().read_line(&mut input_desc_task);
     
         //let mut id = 0;
 
-        let config_file = ConfigFile::new_file(input_name, input_task, id_task);
+        let config_file = ConfigFile::new_file(input_name_task, input_desc_task, id_task);
         
        // id += 1;
 
         println!();
         
-        let serialized_file = toml::to_string(&config_file).unwrap();
-
         create_file(config_file);
     }
 }
