@@ -1,5 +1,4 @@
-pub struct ConfigFile {
-    id_task : i8,
+pub struct ConfigFile {    
     name_file : String,
     name_task : String,
     done : bool,
@@ -7,10 +6,9 @@ pub struct ConfigFile {
 
 impl ConfigFile {
     
-    pub fn new_file(name_file: String, name_task: String, id_task: i8) -> Self {
+    pub fn new_file(name_file: String, name_task: String) -> Self {
         
         Self{
-            id_task,
             name_file,
             name_task,
             done : false,
@@ -29,11 +27,11 @@ impl ConfigFile {
         self.done
     }
     
-    pub fn get_id(&self) -> i8 {
-        self.id_task
-    }
+    // pub fn get_id(&self) -> i8 {
+    //     self.id_task
+    // }
 
-    pub fn set_done(mut self) {
-        self.done = true;
-    }
+    //pub fn set_done(mut self) {
+     //   self.done = true;
+    //}
 }
