@@ -30,15 +30,15 @@ impl ConfigFile {
         self.desc_task.clone()
     }
     
-    pub fn get_done(&self) -> bool {
-        self.done
-    }
+    // pub fn get_done(&self) -> bool {
+    //     self.done
+    // }
     
      pub fn get_id(&self) -> u64 {
          self.id_task
     }
 
-    pub fn set_done(mut self) {
-       self.done = true;
-    }
+    // pub fn set_done(mut self) {
+    //    self.done = true;
+    // }
 }

@@ -1,32 +1,21 @@
 
 pub mod create_task {
 
-    use std::{fs::{self, File}, io::Read};
+    use std::*;
 
     use crate::modulos::config::ConfigFile;
 
     fn create_file(config_file : ConfigFile) {
+        
+        let path = format!("{}/qacer/save_file",dirs::document_dir().unwrap().display().to_string());
 
-        let path = format!("{}/qacer/save_file", dirs::document_dir().unwrap().display().to_string());
+        let mut data = fs::read_to_string(&path).unwrap();
 
-        let mut data = String::new();
+        let contents = format!("{}\n{}{}", config_file.get_id(), config_file.get_name(), config_file.get_task());
 
-        let _ = match File::open(&path) {
-            Ok(mut file) => {
-                file.read_to_string(&mut data)
-            },
-            Err(_) => {
-                return;
-            }
-        };
-
-        let contents = toml::to_string(&config_file).unwrap();
-
-        data.push_str(&contents);
+        data.push_str(&contents.as_str());
 
         let _ = fs::write(&path, &data);
-
-        println!("{}", data);
 
     }
 
@@ -55,5 +44,30 @@ pub mod create_task {
 
 
 pub mod get_task {
-    
+    use std::fs;
+
+
+    fn get_tasks(id_task: u64) -> Vec<String>  {
+        
+        let path = format!("{}/qacer/save_file",dirs::document_dir().unwrap().display().to_string());
+
+        let data = fs::read_to_string(path).unwrap();
+
+        let mut content: Vec<String> = Vec::new();
+
+        for element in data.lines() {
+
+            content.push(element.to_string());
+
+        }
+
+        content
+
+    }
+
+    pub fn get_task() {
+        
+        println!("{:?}",get_tasks(1));
+    }
+
 }
