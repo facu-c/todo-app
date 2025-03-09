@@ -26,7 +26,9 @@ pub mod create_task {
 
         let _ = fs::write(&path, &data);
 
-        println!("{:?}", data);
+        println!("{}", data);
+
+        
 
     }
 
@@ -44,12 +46,9 @@ pub mod create_task {
         println!("Agrege una descripcion de la tarea: ");
         let _ = io::stdin().read_line(&mut input_desc_task);
     
-        //let mut id = 0;
 
         let config_file = ConfigFile::new_file(input_name_task, input_desc_task, id_task);
         
-       // id += 1;
-
         println!();
         
         create_file(config_file);
