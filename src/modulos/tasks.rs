@@ -28,8 +28,6 @@ pub mod create_task {
 
         println!("{}", data);
 
-        
-
     }
 
     pub fn create_task(id_task: u64) {
@@ -55,6 +53,7 @@ pub mod create_task {
     }
 }
 
-// pub mod get_task {
+
+pub mod get_task {
     
-// }
+}
