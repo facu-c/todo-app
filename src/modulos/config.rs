@@ -1,7 +1,7 @@
 
 use serde_derive::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ConfigFile { 
     id_task: u64,   
     name_task : String,
@@ -9,7 +9,6 @@ pub struct ConfigFile {
     done : bool,
 }
 
-#[warn(dead_code)]
 impl ConfigFile {
     
     pub fn new_file(name_task: String, desc_task: String, id_task: u64) -> Self {

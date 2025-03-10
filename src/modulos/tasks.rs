@@ -41,33 +41,3 @@ pub mod create_task {
         create_file(config_file);
     }
 }
-
-
-pub mod get_task {
-    use std::fs;
-
-
-    fn get_tasks(id_task: u64) -> Vec<String>  {
-        
-        let path = format!("{}/qacer/save_file",dirs::document_dir().unwrap().display().to_string());
-
-        let data = fs::read_to_string(path).unwrap();
-
-        let mut content: Vec<String> = Vec::new();
-
-        for element in data.lines() {
-
-            content.push(element.to_string());
-
-        }
-
-        content
-
-    }
-
-    pub fn get_task() {
-        
-        println!("{:?}",get_tasks(1));
-    }
-
-}

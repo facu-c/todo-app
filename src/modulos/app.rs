@@ -2,7 +2,6 @@ use std::fs::{self, File};
 use std::io;
 
 use crate::modulos::tasks::create_task::create_task;
-use crate::modulos::tasks::get_task::get_task;
 
 extern crate dirs;
 
@@ -17,34 +16,14 @@ pub fn run_app() {
         }
     };
 
+    println!("{:?}", &document_dir);
+
     match fs::create_dir(&document_dir) {
         Ok(_) => {
             let _ = File::create(format!("{}/save_file",&document_dir));
         },
         Err(msg) => { eprintln!("Hubo un problema con la creacion del directorio raiz: {} ", msg); }
     }
-
-    let mut v_data = Vec::new();
-
-    let last_id = match fs::read_to_string(format!("{}/save_file",document_dir)) {
-        Ok(data) => {
-
-            for element in data.lines() {
-                v_data.push(element.to_string());
-            }
-
-            v_data.get(v_data.len()-3).unwrap()
-
-        },
-        Err(_) => { panic!("Not found") }
-    };
-
-    println!("{}",last_id);
-
-
-    let mut id_task:u64 = last_id.parse().unwrap();
-
-
 
     loop {
 
@@ -55,7 +34,7 @@ pub fn run_app() {
 
         let mut number_option = String::new();
 
-        id_task += 1;
+        //  id_task += 1;
 
         match io::stdin().read_line(&mut number_option) {
             Ok(_) => {},
@@ -65,7 +44,7 @@ pub fn run_app() {
         match number_option.trim().to_uppercase().as_str() {
             
             "X" => break,
-            "A" => create_task(id_task),
+            "A" => create_task(0),
             _ => {
                 println!("No se logro identificar la accion solicitada, por favor, intente de nuevo");
                 continue;
@@ -73,6 +52,4 @@ pub fn run_app() {
         }
     }
     println!("Hasta luego!");
-
-    get_task();
 }
