@@ -27,5 +27,5 @@ pub fn start_menu() {
             //TODO: Agregar "recuperar tareas"
         }
     }
-    println!("Hasta luego!");
+    println!("¡Hasta luego!");
 }
