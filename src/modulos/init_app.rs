@@ -4,7 +4,7 @@ use std::fs::{self, File};
 pub fn init() {
     let document_dir: String = match dirs::document_dir() {
         Some(dir) => {
-            format!("{}/qacer",dir.display().to_string())
+            format!("{}/qacer",dir.display())
         },
         None => {
             String::from("no se pudo encotrar el path correcto")

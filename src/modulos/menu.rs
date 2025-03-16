@@ -10,7 +10,7 @@ pub fn start_menu() {
         println!("X. Salir de Qacer");
 
         let mut number_option = String::new();
-        //  id_task += 1;
+        
         match io::stdin().read_line(&mut number_option) {
             Ok(_) => {},
             Err(_) => eprintln!("No se logro identificar la accion solicitada"),

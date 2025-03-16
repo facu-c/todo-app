@@ -4,15 +4,15 @@ use crate::modulos::config::ConfigFile;
 
 fn create_file(config_file : ConfigFile) {
     
-    let path = format!("{}/qacer/save_file",dirs::document_dir().unwrap().display().to_string());
+    let path = format!("{}/qacer/save_file",dirs::document_dir().unwrap().display());
 
     let mut data = fs::read_to_string(&path).unwrap();
 
     let contents = format!("{}\n{}{}", config_file.get_id(), config_file.get_name(), config_file.get_task());
 
-    data.push_str(&contents.as_str());
+    data.push_str(contents.as_str());
 
-    let _ = fs::write(&path, &data);
+    let _ = fs::write(path.as_str(), data.as_str());
 
 }
 
