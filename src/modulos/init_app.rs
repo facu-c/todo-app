@@ -11,12 +11,18 @@ pub fn init() {
         }
     };
 
-    println!("{:?}", &document_dir);
-
     match fs::create_dir(&document_dir) {
         Ok(_) => {
             let _ = File::create(format!("{}/save_file",&document_dir));
         },
-        Err(msg) => { eprintln!("Hubo un problema con la creacion del directorio raiz: {} ", msg); }
+        Err(msg) => {
+
+            if msg.to_string().contains("17") {
+                print!("");
+            }
+            else {
+                eprintln!("Hubo un problema con la creacion del directorio raiz: {} ", msg);
+            }
+        }
     }
 }
